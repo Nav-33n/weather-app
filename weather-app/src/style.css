@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    font-family: 'Signika', sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px);
+    
+}
+
+
+.main-container {
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 70% 30%;
+    width: 70vw;
+    height: 80vh;
+    border: 10px solid rgb(141, 127, 127);
+    border-radius: 10px;
+    gap: 2px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.left-container {
+    background-repeat: no-repeat;
+    background-size: cover;
+    grid-area: 1 / 1 / 2 / 2;
+    display: grid;
+    grid-template-rows: repeat(15, 1fr);
+    grid-template-columns: repeat(10, 1fr);    
+}
+
+.right-container {
+    grid-area: 1 / 2 / 2 / 3;
+    display: grid;
+    grid-template-rows: repeat(15, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    opacity: 0.9;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 7px rgb(10, 6, 6);
+}
+
+.time {
+    grid-area: 1 / 4 / 2 / 11;
+    justify-self: flex-end;
+    display: flex;
+    height: min-content;
+    border: none;
+    margin: 20px;
+    text-align: center;
+    font-size: 18px;
+    padding: 0 7px;
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 7px rgb(10, 6, 6);
+}
+
+.time span {
+    color: rgb(255, 252, 252);
+    font-size: 0.99em;
+    font-weight: 600;
+    margin: 0 1px;
+}
+
+.condition, .text-wrap {
+    justify-self: flex-end;
+    align-self: center;
+    display: flex;
+    margin-right: 30px;
+    height: min-content;
+    border: none;
+    text-transform: capitalize;
+    flex-wrap: nowrap;
+}
+
+.condition{
+    grid-area: 9 / 4 / 10 / 11; 
+    font-size: 3rem;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 7px rgb(10, 6, 6);
+}
+
+.text-wrap{
+    grid-area: 9/ 1 / 10 / 11;
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 7px rgb(10, 6, 6);
+}
+
+.underline1 {
+    width: 94%;
+    justify-self: center;
+    height: 0;
+    border-radius: 5px;
+    grid-area: 11 / 1 / 11 / 11;
+    border: 2px solid rgba(148, 131, 131, 0.801);
+}
+.searchbar{
+    grid-area: 1 / 2 / 2 / 3;
+    justify-self: center;
+    align-self: end;
+    display: flex;
+    height: min-content;
+    border: none;
+}
+
+.searchbar input{
+    width: 11rem;
+    height: 1.7rem;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-family: 'Signika', sans-serif;
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    border: 2px solid rgba(255, 254, 254, 0.589);
+    background-color: transparent;
+    color: rgb(250, 246, 246);
+}
+
+::placeholder {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.664);
+}
+.searchbar input:focus {
+    outline: none;
+}
+.degree {
+    grid-area: 3 / 2 / 4 / 3;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    height: min-content;
+    border: none;
+}
+
+.degree span {
+    font-size: 3.5rem;
+}
+
+.wind {
+    grid-area: 4 / 2 / 5 / 3;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    height: min-content;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.fa-solid{
+    margin-right: 5px;
+}
+
+.underline {
+    grid-area: 5 / 2 / 6 / 3;
+    justify-self: center;
+    align-self: center;
+    width: calc(100% + 20px);
+    max-width: calc(100% + 90px);
+    min-width: calc(50%);
+    height: 0;
+    border: 2px solid rgba(148, 131, 131, 0.801);
+    border-radius: 5px;
+}
+
+.future {
+    grid-area: 6 / 2 / 7 / 3;
+    width: calc(100% + 20px);
+    align-self: self-end;
+    justify-self: center;
+    text-transform: capitalize;
+    white-space: nowrap;
+     text-align: center;
+}
+
+.future label {
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+
+.future-forecast{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% + 20px);
+    justify-self: center;
+    grid-area: 7 / 2 / 15 / 3;
+    /* border: 2px solid red; */
+}
+
+.day-forecast {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    margin: 10px 0 10px 0;
+    height: 3.5rem;
+    /* border: 2px solid blue; */
+    gap: 5px;
+}
+
+.img-container{
+    grid-area: 1 / 1 / 1 / 2;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: rgba(6, 11, 17, 0.438);
+    background-image: linear-gradient(315deg, rgba(72, 84, 97, 0.9), rgba(40, 49, 59, 0.3));
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: rgba(6, 24, 44, 0.1) 0px 0px 0px 2px, rgba(6, 24, 44, 0.1) 0px 4px 6px -1px, rgba(255, 255, 255, 0.1) 0px 1px 0px inset;
+}
+
+.img-container img {
+    width: 100%;
+
+}
+.date-condition{
+    justify-self: flex-start;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    /* white-space: nowrap; */
+}
+.date-condition label {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.date-condition p {
+    font-size: 0.9rem;
+    text-transform: capitalize;
+}
+
+.f-temp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hour-forecast {
+    grid-area: 11 / 1 / 16 / 11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hour-container {
+    width: 4.9rem;
+    height: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 15px 12px 0 0;
+    border: 1px solid rgba(51, 58, 51, 0.082);
+    background-color: rgba(72, 84, 97, 0.2);
+    background-image: linear-gradient(315deg, rgba(72, 84, 97, 0.9), rgba(40, 49, 59, 0.3));
+    border-radius: 10px;
+    padding: 10px;
+    color: rgba(253, 253, 253, 0.856);
+    text-shadow: 2px 2px 7px rgb(10, 6, 6);
+}
+.hour-container p{
+    font-size: 1.1rem;
+    font-weight: 550;
+}
+
+.hover{
+    background-color: #2d3436;
+    background-image: linear-gradient(315deg, rgba(45, 52, 54, 0.8), rgba(0, 0, 0, 0.6));
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.under-line {
+    width: 50%;
+    border: 1px solid rgb(139, 130, 130);
+    border-radius: 2px;
+}
+
+.weather-icon {
+    display: flex;
+    justify-content: center;
+    object-fit: contain;
+    width: 3rem;
+    border-radius: 8px;
+    margin-top: 10px;
+    background-color: rgb(54, 66, 62);
+}
+
+.weather-icon img {
+    width: 100%;
+}
+
+.hour-container span {
+    font-size: 1.2rem;
+    font-weight: 550;
+    margin-top: 10px;
+}
