@@ -30,7 +30,7 @@ export default function App() {
 
     const fetchWeatherData = async () => {
       try {
-        const url = `https://nabin-weather-api.onrender.com/forecast?city=${encodeURIComponent(searchValue)}`;
+        const url = `${process.env.REACT_APP_API_BASE_URL}/forecast?city=${encodeURIComponent(searchValue)}`;
         const response = await fetch(url);
 
          if (!response.ok) {
