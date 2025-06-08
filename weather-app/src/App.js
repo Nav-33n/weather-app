@@ -23,13 +23,14 @@ export default function App() {
     }
   }, [searchValue]);
 
+  console.log("Search Value:", searchValue);
   // Fetch weather data when searchValue changes
   useEffect(() => {
     if (!searchValue) return;
 
     const fetchWeatherData = async () => {
       try {
-        const url = `${baseUrl}?city=${encodeURIComponent(searchValue)}`;
+        const url = `${baseUrl}/forecast?city=${encodeURIComponent(searchValue)}`;
         const response = await fetch(url);
 
          if (!response.ok) {
@@ -48,7 +49,6 @@ export default function App() {
     fetchWeatherData();
   }, [searchValue]);
 
-   console.log("Weather Data:", wData);
   // Compute current time only when data is available
   const currentTime = useMemo(() => {
     if (!wData || !wData.current) return "";
