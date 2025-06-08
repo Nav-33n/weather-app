@@ -30,7 +30,7 @@ export default function App() {
 
     const fetchWeatherData = async () => {
       try {
-        const url = `${baseUrl}/forecast?city=${encodeURIComponent(searchValue)}`;
+        const url = `${baseUrl}?city=${encodeURIComponent(searchValue)}`;
         const response = await fetch(url);
 
          if (!response.ok) {
