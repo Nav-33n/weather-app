@@ -1,15 +1,15 @@
-import React from "react";
+export default function HourForecast({ time, exactTime, icon, temp }) {
+  const isCurrentHour = time === exactTime;
+  const containerClass = `hour-container${isCurrentHour ? " hover" : ""}`;
 
-export default function HourForecast(props){
-
-    return(
-        <div className={props.time === props.exactTime ? "hour-container hover" : "hour-container"}>
-            <p>{props.time}</p>
-            <div className="under-line"></div>
-            <div className="weather-icon">
-                <img src={props.icon} alt="weather-icon"></img>
-            </div>
-            <span>{props.temp + " °C"}</span>
-        </div>
-    )
+  return (
+    <div className={containerClass}>
+      <p>{time}</p>
+      <div className="under-line"></div>
+      <div className="weather-icon">
+        <img src={icon} alt={`Weather at ${time}`} />
+      </div>
+      <span>{`${temp} °C`}</span>
+    </div>
+  );
 }

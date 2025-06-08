@@ -1,29 +1,25 @@
 import React from "react";
 
-export default function FutureForecast(props) {
+export default function FutureForecast({ dates, condition, icon, maxtemp, mintemp }) {
+  const getFormattedDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    return date.toLocaleString('en-US', options);
+  };
 
-    function getDayMonthAndDate(dateString) {
-        
-        const date = new Date(dateString);
-        const options = { weekday: 'long', month: 'long', day: 'numeric' };
-        const formattedDate = date.toLocaleString('en-US', options);
-  
-        return formattedDate;
-      }
-
-    return(
-            <div className="day-forecast">
-                <div className="img-container">
-                <img src={props.icon} alt="weather-icon"></img>
-                </div>
-                <div className="date-condition">
-                    <label>{getDayMonthAndDate(props.dates)}</label>
-                    <p>{props.condition}</p>
-                </div>
-                <div className="f-temp">
-                    <span>{props.mintemp + "°"}</span>
-                    <span>{props.maxtemp + "°"}</span>
-                </div>
-            </div>
-    )
+  return (
+    <div className="day-forecast">
+      <div className="img-container">
+        <img src={icon} alt={`Weather icon for ${condition}`} />
+      </div>
+      <div className="date-condition">
+        <label>{getFormattedDate(dates)}</label>
+        <p>{condition}</p>
+      </div>
+      <div className="f-temp">
+        <span>{`${mintemp}°`}</span>
+        <span>{`${maxtemp}°`}</span>
+      </div>
+    </div>
+  );
 }

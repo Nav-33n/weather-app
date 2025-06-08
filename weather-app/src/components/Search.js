@@ -1,31 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-export default function Search(props) {
-   
-    const [place, setPlace] = React.useState('');
-    let search = document.getElementById("searchbar");
-    let region = props.region === "" ? props.country : props.region;
-    
-    let places = `${props.place}, ${region}`;
-     useEffect(() => {
-        setPlace(places);
-     }, [places])
+export default function Search({ place, region, country, search }) {
+  const [placeholder, setPlaceholder] = useState('');
+  const inputRef = useRef(null);
 
-    function handleSubmit(event) {
-        let searchValue = "";
-        
-        if(event.keyCode === 13){
-            searchValue = search.value;
-            props.search(searchValue)
-            search.value = "";
-            
-        }
+  const regionDisplay = region || country;
+
+  useEffect(() => {
+    setPlaceholder(`${place}, ${regionDisplay}`);
+  }, [place, regionDisplay]);
+
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      const value = inputRef.current.value.trim();
+      if (value) {
+        search(value);
+        inputRef.current.value = '';
+      }
     }
+  }
 
-    
-    return(
-        <div className="searchbar">
-            <input type="text" id="searchbar" onKeyDown={handleSubmit} autocomplete="off" placeholder={place}></input>
-        </div>
-    )
+  return (
+    <div className="searchbar">
+      <input
+        type="text"
+        ref={inputRef}
+        onKeyDown={handleKeyDown}
+        autoComplete="off"
+        placeholder={placeholder}
+      />
+    </div>
+  );
 }

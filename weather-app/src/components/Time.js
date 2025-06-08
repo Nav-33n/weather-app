@@ -1,34 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Time(props) {
-    const [currentTime, setCurrentTime] = React.useState('');
-    const [currentDate, setCurrentDate] = React.useState('');
+export default function Time({ timezone }) {
+  const [currentTime, setCurrentTime] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
 
-    React.useEffect(() => {
-        const timer = () => {
-            const date = new Date();
-            const options = {timeZone: props.timezone};
-            const formatDate = {year: "numeric", month: "long", day: "numeric", timeZone: props.timezone};
-            const time = date.toLocaleTimeString([], options);
-            const cDate = date.toLocaleDateString([], formatDate);
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
 
-            setCurrentDate(cDate);
-            setCurrentTime(time);
-        }
+      const timeOptions = { timeZone: timezone };
+      const dateOptions = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        timeZone: timezone
+      };
 
-        timer();
+      setCurrentTime(now.toLocaleTimeString('en-US', timeOptions));
+      setCurrentDate(now.toLocaleDateString('en-US', dateOptions));
+    };
 
-        const interval = setInterval(timer, 1000);
+    updateTime(); // initial call
+    const intervalId = setInterval(updateTime, 1000);
 
-        return () => {
-            clearInterval(interval)
-        }
-    }, [props.timezone])
+    return () => clearInterval(intervalId); // cleanup on unmount
+  }, [timezone]);
 
-
-    return(
-        <div className="time">
-            <p>{currentDate} <span>|</span> {currentTime}</p>
-        </div>
-    )
+  return (
+    <div className="time">
+      <p>{currentDate} <span>|</span> {currentTime}</p>
+    </div>
+  );
 }

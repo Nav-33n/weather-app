@@ -1,40 +1,56 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { createClient } from "pexels";
 
-export default function CurrentWeather(props){
+export default function CurrentWeather({ condition }) {
+  const [photoData, setPhotoData] = useState(null);
 
-    const [image, setImage] = React.useState(null);
-    const client = createClient(`${process.env.REACT_APP_PHOTO_API_KEY}`);
-    const query = `${props.condition}`
+  const client = useMemo(
+    () => createClient(process.env.REACT_APP_PHOTO_API_KEY),
+    []
+  );
 
- useEffect(() => {
-    const query = `${props.condition}`
-    client.photos.search({ query, per_page: 5 }).then(photos => setImage(photos));
+  useEffect(() => {
+    if (!condition) return;
 
- }, [props.condition])
+    const fetchPhoto = async () => {
+      try {
+        const res = await client.photos.search({ query: condition, per_page: 5 });
+        setPhotoData(res);
+      } catch (error) {
+        console.error("Error fetching background image:", error);
+      }
+    };
 
-    if(image === null){
-        return <div>Loading...</div>
-    }
-    
-    let randomNumber = Math.floor(Math.random() * 5);
-    let body = document.body;
-    let leftContainer = document.querySelector(".left-container");
-    let rightContainer = document.querySelector(".right-container");
-    let text = document.querySelector(".condition");
-    
-    body.style.backgroundImage = `url(${image.photos[randomNumber].src.landscape})`
-    leftContainer.style.backgroundImage = `url(${image.photos[randomNumber].src.landscape})`
-    rightContainer.style.backgroundColor = `${image.photos[randomNumber].avg_color}`;
+    fetchPhoto();
+  }, [condition, client]);
 
-    function handleWord(word){
-    const words = word.split(" ");
-    const wordCount = words.length;
-    return wordCount
-    }
-    return (
-        <div className={handleWord(props.condition) > 3 ? "text-wrap" : "condition"}>
-            <p>{props.condition} </p>
-        </div>
-    )
+  const backgroundImage = useMemo(() => {
+    if (!photoData || !photoData.photos || photoData.photos.length === 0) return null;
+    const index = Math.floor(Math.random() * photoData.photos.length);
+    return photoData.photos[index];
+  }, [photoData]);
+
+  useEffect(() => {
+    if (!backgroundImage) return;
+
+    document.body.style.backgroundImage = `url(${backgroundImage.src.landscape})`;
+
+    const left = document.querySelector(".left-container");
+    const right = document.querySelector(".right-container");
+
+    if (left) left.style.backgroundImage = `url(${backgroundImage.src.landscape})`;
+    if (right) right.style.backgroundColor = backgroundImage.avg_color;
+  }, [backgroundImage]);
+
+  if (!backgroundImage) {
+    return <div className="condition">Loading...</div>;
+  }
+
+  const isLongCondition = condition.split(" ").length > 3;
+
+  return (
+    <div className={isLongCondition ? "text-wrap" : "condition"}>
+      <p>{condition}</p>
+    </div>
+  );
 }
