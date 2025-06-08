@@ -12,7 +12,7 @@ export default function App() {
   const [wData, setWData] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [error, setError] = useState(null);
-  const baseUrl = process.env.REACT_APP_API_BASE_URL;
+  
 
   // Set default search value based on timezone
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function App() {
 
     const fetchWeatherData = async () => {
       try {
-        const url = `${baseUrl}?city=${encodeURIComponent(searchValue)}`;
+        const url = `https://nabin-weather-api.onrender.com/forecast?city=${encodeURIComponent(searchValue)}`;
         const response = await fetch(url);
 
          if (!response.ok) {
