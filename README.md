@@ -27,13 +27,13 @@
 Here are some real screenshots showing how the UI adapts visually:
 
 ### ☁️ Misty in Calcutta
-![Misty](./sample/s1.png)
+![Misty](./weather-app/sample/s1.png)
 
 ### ☀️ Sunny in London
-![Sunny](./sample/s2.png)
+![Sunny](./weather-app/sample/s2.png)
 
 ### ❄️ Freezing Fog in Canberra
-![Freezing Fog](./sample/s3.png)
+![Freezing Fog](./weather-app/sample/s3.png)
 
 > _The interface gives you not just the forecast — but the **atmosphere** of the moment._
 
